@@ -12,10 +12,11 @@ publicKey =rsa.PublicKey(1087136308489807002230389600290339126544439201630898158
 timeNow = datetime.now()
 end_date = timeNow + timedelta(days=period)
 fileName = clientName + '_' + str(period) + '.zip'
+format_string = '%Y-%m-%d %H:%M:%S'
 
-message = str(end_date)
+message = end_date.strftime(format_string)
 # publicKey, privateKey = rsa.newkeys(512)
-encMessage = rsa.encrypt(message.encode('utf-8'), publicKey)
+encMessage = rsa.encrypt(message.encode(), publicKey)
 # wMessage = str(encMessage)
 
 for filePath in glob('*.zip'):
