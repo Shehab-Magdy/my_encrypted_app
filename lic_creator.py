@@ -6,7 +6,7 @@ from zipfile import ZipFile
 
 
 clientName = input('Please Type Client name: ')
-period = int(input('Please Type Period in days: '))
+period = int(input('Please Type the Period in days: '))
 licenseFileName = 'License.lic'
 publicKey =rsa.PublicKey(10871363084898070022303896002903391265444392016308981589701418203435182379057843234360336520869928895398932205768274281413654263140154242008097101032149633, 65537)
 timeNow = datetime.now()
@@ -24,8 +24,7 @@ for filePath in glob('*.zip'):
 with open(licenseFileName, 'wb') as f:
         f.write(encMessage)
 
-zf = ZipFile(fileName, 'w')
-zf.write(licenseFileName)
-zf.close()
+with ZipFile(fileName, 'w') as zf:
+    zf.write(licenseFileName)
 
-os.remove(licenseFileName)
+os.unlink(licenseFileName)
